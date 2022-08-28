@@ -1,0 +1,15 @@
+
+.card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+.mat-form-field{
+    display: flex;
+    flex-flow: column-reverse;
+}
+.mat-card{
+    width: 50%;
+    height: 25rem;
+}
