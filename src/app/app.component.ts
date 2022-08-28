@@ -25,7 +25,6 @@ export class AppComponent {
   private myChart: any = null;
   dateVal!: Date;
   public rowSelection: 'single' | 'multiple' = 'multiple';
-  private gridApi!: GridApi<IOlympicData>;
   title = 'rawlab';
   columnDefs = [{ field: "name", sortable: true}, { field: "country", sortable: true }, { field: "profession", sortable: true }];
   
@@ -33,8 +32,8 @@ export class AppComponent {
   }
   wikidata:wikidata[] = [];
   ngOnInit(){
-    console.log(this.datepipe.transform(this.first, 'yyyyMMdd'))
-    console.log(this.datepipe.transform(this.currentdate, 'yyyyMMdd'))
+    // console.log(this.datepipe.transform(this.first, 'yyyyMMdd'))
+    // console.log(this.datepipe.transform(this.currentdate, 'yyyyMMdd'))
   }
   rowData = [
     { name: "Tiger King", country: "United States", profession: "Artist" },
@@ -44,19 +43,19 @@ export class AppComponent {
     { name: "Tom Brady", country: "United States", profession: "Sports" },
     { name: "Elon Musk", country: "United States", profession: "IT" },
     { name: "Dwayne Johnson", country: "United States", profession: "Artist" },
-    { name: "Christian Ronaldo", country: "Portugal", profession: "Sports" },
+    { name: "Christiano Ronaldo", country: "Portugal", profession: "Sports" },
   ];
   onRowclicked(e:any){
-    console.log(e.data.name)
+    // console.log(e.data.name)
     this.rowname = e.data.name.replace(' ', '_')
    if(this.range.value.start !== undefined || null || this.range.value.end !== undefined || null) {
-    console.log("s");
+    // console.log("s");
     this.WikiservicesService.getwiki(this.rowname,this.first1, this.currentdate1).subscribe(data => this.InitPipe(data.items));
    }
   
-  console.log(this.first1);
-  console.log(this.lastdate);
-  console.log(this.currentdate1);
+  // console.log(this.first1);
+  // console.log(this.lastdate);
+  // console.log(this.currentdate1);
 
   }
   private InitPipe(s: any): void {
@@ -72,7 +71,7 @@ export class AppComponent {
       this.dateVal = dateObj;
     return formatedString.slice(-2)
 });
-  console.log(date)
+  // console.log(date)
     this.myChart = echarts.init((document.getElementById('main')) as any);
      const option = {
       xAxis: {
@@ -99,15 +98,14 @@ export class AppComponent {
     end: new FormControl<Date | null>(null),
   });
   changed(e:any){ 
-    if (this.range.value.start !== null || this.range.value.start !== null){
+    if (this.range.value.start !== null && this.range.value.end !== null){
       let first = this.datepipe.transform(this.range.value.start, 'yyyyMMdd');
       let last = this.datepipe.transform(this.range.value.end, 'yyyyMMdd')
-      console.log(first)
-      console.log(last)
+      // console.log(first)
+      // console.log(last)
       // this.startDate = this.datePipe.transform(this.range.value.end, 'yyyyMMdd')
     this.WikiservicesService.getwiki(this.rowname,first,last).subscribe(data => this.InitPipe(data.items));
 
-      console.log()
       
 
     }
