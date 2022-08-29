@@ -98,7 +98,7 @@ export class AppComponent {
     end: new FormControl<Date | null>(null),
   });
   changed(e:any){ 
-    if (this.range.value.start !== null && this.range.value.end !== null){
+    if (this.range.value.start !== null && this.range.value.end !== null && this.rowname !== undefined &&  this.rowname !== ''){
       let first = this.datepipe.transform(this.range.value.start, 'yyyyMMdd');
       let last = this.datepipe.transform(this.range.value.end, 'yyyyMMdd')
       // console.log(first)
